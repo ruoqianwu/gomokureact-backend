@@ -19,6 +19,9 @@ io.on('connection', client => {
 
 app.use(cors)
 
+const router = require('./router')
+app.use(router)
+
 const port = process.env.PORT || 5000
 server.listen(port, () => {
     console.log(`listening on PORT ${port}`)
