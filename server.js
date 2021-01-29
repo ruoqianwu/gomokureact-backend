@@ -6,10 +6,7 @@ const app = express();
 const cors = require('cors')
 
 const server = http.createServer(app);
-const io = socketio(server, {cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
-  }});
+const io = socketio(server);
 
 io.on('connection', client => {
     gameLogic.initializeGame(io, client)
@@ -17,10 +14,11 @@ io.on('connection', client => {
 });
 
 
-app.use(cors)
 
 const router = require('./router')
 app.use(router)
+app.use(cors())
+
 
 const port = process.env.PORT || 5000
 server.listen(port, () => {
